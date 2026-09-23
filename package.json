@@ -1,0 +1,55 @@
+{
+    "author": "Moaske",
+    "dependencies": {
+        "@rebble/clay": "^1.1.0"
+    },
+    "keywords": [],
+    "name": "eduweek",
+    "pebble": {
+        "capabilities": [
+            "configurable"
+        ],
+        "displayName": "EduWeek",
+        "enableMultiJS": true,
+        "messageKeys": [
+            "WEEKS",
+            "STATUS",
+            "CSV_URL"
+        ],
+        "projectType": "native",
+        "resources": {
+            "media": [
+                {
+                    "characterRegex": "[ -~\u00e0-\u00fc]",
+                    "file": "fonts/segoeuib.ttf",
+                    "name": "FONT_SEGOEUIB_24",
+                    "targetPlatforms": null,
+                    "type": "font"
+                },
+                {
+                    "characterRegex": "[ -~\u00e0-\u00fc]",
+                    "file": "fonts/segoeuib.ttf",
+                    "name": "FONT_SEGOEUIB_20",
+                    "targetPlatforms": null,
+                    "type": "font"
+                },
+                {
+                    "file": "images/eduweek_app_icon.png",
+                    "menuIcon": true,
+                    "name": "EDUWEEK_APP_ICON",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                }
+            ]
+        },
+        "sdkVersion": "3",
+        "targetPlatforms": [
+            "emery"
+        ],
+        "uuid": "352b7d6f-668d-4d5d-9e7a-be59841d5940",
+        "watchapp": {
+            "watchface": false
+        }
+    },
+    "version": "1.0.0"
+}
