@@ -20,8 +20,8 @@
 ---------------------------------------------------------- */
 /* Mockup purple is #643994. Nearest palette colour is GColorLiberty
    (bluish); GColorIndigo reads as purple on the Time 2 display. */
-#define ACCENT_COLOR     GColorIndigo
-#define SEPARATOR_COLOR  GColorLightGray
+#define ACCENT_COLOR     GColorImperialPurple
+#define SEPARATOR_COLOR  GColorImperialPurple
 
 #define MAX_WEEKS        60      /* must match MAX_WEEKS in index.js */
 #define PAYLOAD_MAX      3072
@@ -273,7 +273,12 @@ static void detail_update_proc(Layer *layer, GContext *ctx) {
 
   /* 6. Edu week */
   graphics_context_set_text_color(ctx, ACCENT_COLOR);
-  draw_text_in_band(ctx, w->edu, s_font_large, GRect(SIDE_PAD, 156, inner_w, 32),
+  if (w->edu[0] >= '0' && w->edu[0] <= '9') {     /* "11" -> "Week 11", "V" stays "V" */
+    snprintf(buf, sizeof(buf), "Week %s", w->edu);
+  } else {
+    snprintf(buf, sizeof(buf), "%s", w->edu);
+  }
+  draw_text_in_band(ctx, buf, s_font_large, GRect(SIDE_PAD, 156, inner_w, 32),
                     GTextAlignmentCenter);
   graphics_context_set_stroke_color(ctx, ACCENT_COLOR);
   graphics_draw_line(ctx, GPoint(SIDE_PAD, 190), GPoint(W - SIDE_PAD - 1, 190));
@@ -359,18 +364,32 @@ static void menu_draw_row(GContext *ctx, const Layer *cell, MenuIndex *idx, void
   const bool hl     = menu_cell_layer_is_highlighted(cell);
   const GRect line1 = GRect(LIST_PAD, 2, b.size.w - 2 * LIST_PAD, LIST_LINE_H);
   const GRect line2 = GRect(LIST_PAD, 2 + LIST_LINE_H, b.size.w - 2 * LIST_PAD, LIST_LINE_H);
-  char left[12], right[16];
+  char left[12], right[16], edu[20];
 
   graphics_context_set_text_color(ctx, hl ? GColorWhite : GColorBlack);
 
   snprintf(left, sizeof(left), "WK %d", w->iso_week);
   format_range(w, right, sizeof(right));
-  draw_text_in_band(ctx, left,  s_font_small, line1, GTextAlignmentLeft);
-  draw_text_in_band(ctx, right, s_font_small, line1, GTextAlignmentRight);
+  draw_text_in_band(ctx, left,   s_font_small, line1, GTextAlignmentLeft);
+  if (w->edu[0] >= '0' && w->edu[0] <= '9') {     /* "11" -> "WK 11", "V" stays "V" */
+    snprintf(edu, sizeof(edu), "WK %s", w->edu);
+  } else {
+    snprintf(edu, sizeof(edu), "%s", w->edu);
+  }
+  draw_text_in_band(ctx, edu,    s_font_small, line1, GTextAlignmentRight);
 
-  snprintf(left, sizeof(left), "P%s", w->period);
+  snprintf(left, sizeof(left), "P%s", w->period);          // line 371 (unchanged)
+  if (w->info[0]) {                        /* "P1 T" : first character of Info */
+    size_t len = strlen(left);
+    size_t i   = 0;
+    left[len++] = ' ';
+    do {                                   /* copy a whole UTF-8 character */
+      left[len++] = w->info[i++];
+    } while (((uint8_t)w->info[i] & 0xC0) == 0x80);
+    left[len] = '\0';
+  }
   draw_text_in_band(ctx, left,   s_font_small, line2, GTextAlignmentLeft);
-  draw_text_in_band(ctx, w->edu, s_font_small, line2, GTextAlignmentRight);
+  draw_text_in_band(ctx, right,  s_font_small, line2, GTextAlignmentRight);
 
   if (!hl) {
     graphics_context_set_stroke_color(ctx, SEPARATOR_COLOR);
