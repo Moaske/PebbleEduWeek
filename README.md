@@ -1,8 +1,10 @@
 # Pebble EduWeek
 ## Weeknumbers for Education schedules
 
+<img src="https://github.com/Moaske/PebbleEduWeek/blob/main/docs/list.png"></img>&nbsp;&nbsp;&nbsp;<img src="https://github.com/Moaske/PebbleEduWeek/blob/main/docs/week39.png"></img>&nbsp;&nbsp;&nbsp;<img src="https://github.com/Moaske/PebbleEduWeek/blob/main/docs/week40.png"></img>&nbsp;&nbsp;&nbsp;<img src="https://github.com/Moaske/PebbleEduWeek/blob/main/docs/week43.png"></img>
+
 Needs a CSV for input with headers: \ISO week, \Period, \EDUweek, \Info. URL of CSV can be provided in app settings.<br>
-Developed for a personal need 😊.
+Developed for a personal requirement 😊 so not published to Pebble Store. You can get a PBW from the releases page. 
 
 Example snippet of the CSV and its values:
 ```csv
