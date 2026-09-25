@@ -3,8 +3,8 @@
 
 <img src="https://github.com/Moaske/PebbleEduWeek/blob/main/docs/list.png"></img>&nbsp;&nbsp;&nbsp;<img src="https://github.com/Moaske/PebbleEduWeek/blob/main/docs/week39.png"></img>&nbsp;&nbsp;&nbsp;<img src="https://github.com/Moaske/PebbleEduWeek/blob/main/docs/week40.png"></img>&nbsp;&nbsp;&nbsp;<img src="https://github.com/Moaske/PebbleEduWeek/blob/main/docs/week43.png"></img>
 
-Needs a CSV for input with headers: \ISO week, \Period, \EDUweek, \Info. URL of CSV can be provided in app settings.<br>
-Developed for a personal requirement 😊 so not published to Pebble Store. You can get a PBW from the releases page. 
+Needs a CSV for input with these headers: <b>\ISO week, \Period, \EDUweek, \Info</b>.<br>URL of CSV to be provided in app settings. Any CSV file name at that exact URL will be read<br>
+Developed for a personal requirement 😊 so not published to the Pebble Store. You can get a PBW from the releases page. 
 
 Example snippet of the CSV and its values:
 ```csv
@@ -26,3 +26,8 @@ ISO week	Period	Edu week	Info
 48	2	2	LKT's
 49	2	3
 ```
+## Settings on phone
+
+<img src="https://github.com/Moaske/PebbleEduWeek/blob/main/docs/settings.png" width="320"></img>
+
+<br>
